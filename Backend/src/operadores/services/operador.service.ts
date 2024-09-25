@@ -2,10 +2,14 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { ProductosService } from 'src/productos/services/productos.service';
 import { Pedido } from '../entitis/pedido.entities';
 import { Operador } from '../entitis/operador.entities';
+import { ConfigService } from '@nestjs/config';
 
 @Injectable()
 export class OperadorService {
-    constructor(private readonly productServices:ProductosService){};
+    constructor(
+        private readonly productService:ProductosService,
+        private readonly configService:ConfigService
+    ){};
     
     private operadores:Operador[] = [
         {
@@ -29,6 +33,10 @@ export class OperadorService {
     ];
 
     findAll(){
+        const apiKey = this.configService.get('API_KEY'); // Asignacion de la variable de entorno a una constante
+        const dbName = this.configService.get('DATABASE_NAME'); 
+
+        console.log(apiKey, dbName);
         return this.operadores;
     };
 
@@ -49,8 +57,8 @@ export class OperadorService {
 
         return {            
             date: new Date(),
-            operador, // te odio profundamente.
-            products: this.productServices.getAllProduct(),
+            operador, 
+            products: this.productService.getAllProduct(),
         };
     };
 
