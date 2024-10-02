@@ -3,7 +3,7 @@ import { OperadorService } from '../services/operador.service';
 import { ApiTags, ApiOperation } from '@nestjs/swagger';
 
 @ApiTags('Operador')
-@Controller('operador')
+@Controller('operadores')
 export class OperadorController {
     constructor( private readonly operadorService:OperadorService ){}
 
@@ -22,6 +22,6 @@ export class OperadorController {
     @ApiOperation({ summary: 'Obtener un pedidos por id de orden.' })
     @Get(':id/pedidos')
     getOreder( @Param('id', ParseIntPipe ) id:number ){
-        return this.operadorService.getOrders(id);
+        return this.operadorService.getOrderByIdUser(id);
     };
 };

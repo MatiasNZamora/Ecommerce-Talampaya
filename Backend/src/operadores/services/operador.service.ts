@@ -48,7 +48,7 @@ export class OperadorService {
         return  operadorFound;
     }
 
-    getOrders( id:number ):Pedido { 
+    getOrderByIdUser( id:number ):Pedido { 
         const operador = this.findOne(id);
         
         if(!operador) {

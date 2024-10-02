@@ -45,7 +45,7 @@ export class ProductosService {
         
         if(!productFound) {
             return new NotFoundException( `El producto con el id: ${id} no existe.` )
-        }
+        };
 
         return productFound;
     };
